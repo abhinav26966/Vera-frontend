@@ -1,0 +1,82 @@
+/* Markdown rendering styles */
+.markdown-content {
+  width: 100%;
+  overflow-wrap: break-word;
+}
+
+.markdown-content p {
+  margin: 0 0 8px 0;
+}
+
+.markdown-content p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-content ul, .markdown-content ol {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+
+.markdown-content li {
+  margin: 2px 0;
+}
+
+.markdown-content pre {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 8px;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 8px 0;
+}
+
+.markdown-content code {
+  font-family: monospace;
+  font-size: 0.9em;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.markdown-content pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+.markdown-content a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.markdown-content blockquote {
+  border-left: 3px solid rgba(0, 0, 0, 0.2);
+  padding-left: 8px;
+  margin: 8px 0;
+  font-style: italic;
+}
+
+.markdown-content h1, .markdown-content h2, .markdown-content h3, 
+.markdown-content h4, .markdown-content h5, .markdown-content h6 {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.markdown-content h1 { font-size: 1.4em; }
+.markdown-content h2 { font-size: 1.3em; }
+.markdown-content h3 { font-size: 1.2em; }
+.markdown-content h4 { font-size: 1.1em; }
+.markdown-content h5, .markdown-content h6 { font-size: 1em; }
+
+/* Style differences for user vs AI messages */
+.user-message .markdown-content a {
+  color: white;
+}
+
+.user-message .markdown-content code,
+.user-message .markdown-content pre {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.user-message .markdown-content blockquote {
+  border-left-color: rgba(255, 255, 255, 0.4);
+} 

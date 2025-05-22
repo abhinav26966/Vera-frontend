@@ -1,0 +1,4 @@
+node_modules
+.env
+test_email
+test_email.py

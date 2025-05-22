@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Keep existing markdown styles */
+@import "./markdown.css";
+
+/* Custom styles */
+:root {
+  --primary-color: #0084ff;
+  --secondary-color: #e5e5ea;
+  --success-color: #34c759;
+  --danger-color: #ff3b30;
+  --background-color: #f9f9f9;
+}
+
+/* Additional custom styles can be added here */
+
+/* Add global scrollbar styling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(17, 24, 39, 0.1);
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #1f2937;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #374151;
+}
+
+html {
+  scroll-behavior: smooth;
+} 
