@@ -70,7 +70,11 @@ export async function sendVoiceMessage(conversation_id, user_id, audioBlob) {
     }
 
     const data = await res.json();
-    console.log("Voice response:", data);
+    console.log("Voice response received:", { 
+      messageLength: data.ai_message?.length || 0,
+      hasAudio: !!data.audio_data,
+      audioSize: data.audio_data?.length || 0
+    });
     return data;
   } catch (error) {
     console.error('Voice message error:', error);

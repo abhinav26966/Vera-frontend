@@ -255,7 +255,6 @@ export default function Chat({ user, conversation, onBack }) {
     setLoading(true);
     setError("");
     try {
-      // Add user message locally
       setMessages(msgs => [...msgs, { 
         sender: "User", 
         message: userMessage,
@@ -263,6 +262,7 @@ export default function Chat({ user, conversation, onBack }) {
       }]);
       // Send to backend
       const res = await sendMessage(conversation.id, userMessage);
+      
       setMessages(msgs => [...msgs, { 
         sender: "AI", 
         message: res.message,
@@ -272,10 +272,38 @@ export default function Chat({ user, conversation, onBack }) {
       setError(err.message || "Failed to send message");
     } finally {
       setLoading(false);
-      // Focus input after sending
       if (inputRef.current) {
         inputRef.current.focus();
       }
+    }
+  };
+
+  // Function to play audio from base64 data
+  const playAudio = (base64Data, contentType = 'audio/mpeg') => {
+    if (!base64Data) return;
+    
+    try {
+      // Create a data URL from base64 data
+      const audioUrl = `data:${contentType};base64,${base64Data}`;
+      console.log("Playing audio from data URL");
+      
+      // Create an audio element
+      const audio = new Audio(audioUrl);
+      
+      // Add event listeners for debugging
+      audio.addEventListener('canplaythrough', () => console.log("Audio ready to play"));
+      audio.addEventListener('error', (e) => console.error("Audio error:", e));
+      
+      // Play the audio
+      audio.play()
+        .then(() => console.log("Audio playback started"))
+        .catch(e => {
+          console.warn("Audio playback failed:", e);
+          setError("Audio playback failed: " + e.message);
+        });
+    } catch (e) {
+      console.error("Error creating audio:", e);
+      setError("Error creating audio: " + e.message);
     }
   };
 
@@ -319,6 +347,12 @@ export default function Chat({ user, conversation, onBack }) {
         try {
           // Send to backend
           const response = await sendVoiceMessage(conversation.id, user.id, audioBlob);
+          
+          // Play audio response if available
+          if (response.audio_data) {
+            playAudio(response.audio_data, response.content_type || 'audio/mpeg');
+          }
+          
           setMessages(msgs => [
             ...msgs,
             { 
