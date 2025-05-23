@@ -589,7 +589,7 @@ export default function Chat({ user, conversation, onBack }) {
               />
             </div>
           
-            <div className="absolute right-1.5 sm:right-2 flex space-x-1 sm:space-x-2">
+            <div className="absolute right-1.5 sm:right-2 flex space-x-1 sm:space-x-2 top-1/2 transform -translate-y-1/2">
               <button 
                 type="submit" 
                 disabled={loading || !input.trim() || isRecording}
