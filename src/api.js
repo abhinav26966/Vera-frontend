@@ -1,4 +1,5 @@
-const API_URL = "http://localhost:8000";
+// Use environment variables with fallback to localhost for development
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000";
 
 export async function signup(email, password) {
   const res = await fetch(`${API_URL}/signup`, {

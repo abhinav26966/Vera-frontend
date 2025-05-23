@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Page</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem; background: #121A24; color: white; }
+        pre { background: #1A2432; padding: 1rem; border-radius: 4px; overflow-x: auto; }
+        button { background: #3498db; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Vera Frontend Debug Page</h1>
+    <p>If you're seeing this page, the main application failed to load. This could be due to:</p>
+    <ul>
+        <li>API connection issues</li>
+        <li>JavaScript errors</li>
+        <li>Missing environment variables</li>
+    </ul>
+    
+    <h2>Console Logs</h2>
+    <pre id="logs">No logs captured yet</pre>
+    
+    <h2>Environment Check</h2>
+    <button onclick="checkEnv()">Check Environment</button>
+    <pre id="env-result"></pre>
+    
+    <script>
+        // Capture console logs
+        const oldConsole = { log: console.log, error: console.error, warn: console.warn };
+        const logs = [];
+        console.log = function(...args) {
+            logs.push(['log', ...args]);
+            document.getElementById('logs').textContent = logs.map(l => `[${l[0]}] ${l.slice(1).join(' ')}`).join('\n');
+            oldConsole.log(...args);
+        };
+        console.error = function(...args) {
+            logs.push(['error', ...args]);
+            document.getElementById('logs').textContent = logs.map(l => `[${l[0]}] ${l.slice(1).join(' ')}`).join('\n');
+            oldConsole.error(...args);
+        };
+        console.warn = function(...args) {
+            logs.push(['warn', ...args]);
+            document.getElementById('logs').textContent = logs.map(l => `[${l[0]}] ${l.slice(1).join(' ')}`).join('\n');
+            oldConsole.warn(...args);
+        };
+        
+        // Function to check environment variables
+        function checkEnv() {
+            const envResult = document.getElementById('env-result');
+            const env = {
+                'window.location': window.location.toString(),
+                'document.baseURI': document.baseURI,
+                'navigator.userAgent': navigator.userAgent
+            };
+            
+            // Check for environment variables (won't reveal actual values)
+            for (const key in process.env) {
+                if (key.startsWith('REACT_APP_')) {
+                    env[key] = process.env[key] ? '[SET]' : '[NOT SET]';
+                }
+            }
+            
+            envResult.textContent = JSON.stringify(env, null, 2);
+        }
+        
+        console.log('Debug page loaded');
+    </script>
+</body>
+</html> 

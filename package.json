@@ -2,6 +2,7 @@
   "name": "hotel-assistant-frontend",
   "version": "1.0.0",
   "private": true,
+  "homepage": "/",
   "dependencies": {
     "dompurify": "^3.2.6",
     "marked": "^15.0.12",

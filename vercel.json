@@ -5,6 +5,28 @@
   "installCommand": "npm install",
   "framework": "create-react-app",
   "routes": [
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/favicon.ico"
+    },
+    {
+      "src": "/manifest.json",
+      "dest": "/manifest.json"
+    },
+    {
+      "src": "/error.html",
+      "dest": "/error.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "REACT_APP_API_URL": "https://your-backend-api-url.com"
+  }
 } 
